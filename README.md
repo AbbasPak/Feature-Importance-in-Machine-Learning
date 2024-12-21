@@ -4,6 +4,12 @@ Welcome to the **Feature Importance in Machine Learning** repository! This repos
 
 ---
 
+## ⚠️ Repository Under Preparation
+
+Please note that this repository is currently under development and will be completed in the next month. Stay tuned for updates, including code examples, detailed explanations, and real-world use cases. Watch this repository to get notified of new additions!
+
+---
+
 ## 📖 Table of Contents
 
 1. [What is Feature Importance?](#what-is-feature-importance)
