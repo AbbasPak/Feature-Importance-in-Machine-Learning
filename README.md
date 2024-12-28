@@ -155,13 +155,6 @@ You’ll find example implementations for each method in the `examples` folder. 
 
 ---
 
-## 🌍 Real-World Use Cases
 
-Discover how feature importance is used in:
-- Healthcare for predicting patient outcomes.
-- Finance for credit scoring and risk assessment.
-- Marketing for customer segmentation and retention analysis.
-
----
 
 
