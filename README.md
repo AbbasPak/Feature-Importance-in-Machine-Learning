@@ -164,8 +164,4 @@ Discover how feature importance is used in:
 
 ---
 
-## 🚀 How to Use this Repository
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/feature-importance.git
