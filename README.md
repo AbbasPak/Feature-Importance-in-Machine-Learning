@@ -134,7 +134,9 @@ This repository covers various methods, grouped into the following categories:
    - SHAP (SHapley Additive exPlanations)
    - LIME (Local Interpretable Model-Agnostic Explanations)
 
-### 4. **Statistical Methods**
+### 4. ** Recursive Feature Elimination (RFE)**
+
+### 5. **Statistical Methods**
    - Correlation
    - Mutual Information
 
