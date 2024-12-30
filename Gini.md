@@ -1,59 +1,80 @@
-# K-Means Clustering for the coping strategies of Brief COPE Questionnaire
-This repository contains the code and results of a `K-means clustering` implementation to extract different groups of `coping strategies` that influence `resilience`.  
+### **Gini Importance (Mean Decrease in Impurity)**  
 
-# Note: This repository is being built and will be completed in the next one day
-## Table of Contents
-+ Introduction
-+ Data
-+ Methodology
-+ Results
+Gini Importance, also known as **Mean Decrease in Impurity (MDI)**, is a measure used to calculate the importance of features in decision tree-based models like Random Forests. It is based on the reduction in the Gini Impurity metric, which measures how well a node in a decision tree separates the data into classes.  
 
-## Introduction
+---
 
-The [Brief COPE](https://github.com/AbbasPak/K-Means-Clustering-in-psychology-Case-study/blob/main/cope.rst) is a widely used self-report questionnaire that assesses coping strategies individuals use when faced with stress or challenging situations. The questionnaire consists of 28 items that measure 14 coping strategies *Self-distraction, Denial, Substance Use, Behavioural disengagement, Emotional Support, Venting, Humour, Acceptance, Self-Blame, Religion, Active Coping, Use of Instrumental Support, Positive Reframing*, and *Planning*.
+### **What is Gini Impurity?**  
+Gini Impurity is a measure of the likelihood of incorrect classification at a decision node if a data point were randomly classified based on the distribution of labels in the node.  
 
-Understanding coping strategies’ impact on psychological `well-being` is key to identifying strategies that may serve as resources for successful adaptation. Existing research has explored the relationship between coping styles and various mental health variables, such as resilience. `Resilience` might be seen as a personality trait—a positive, distinct feature of an individual that mitigates the negative effects of stress and minimizes episodes of depression. 
+The formula for Gini Impurity at a node is:  
+  ![image](https://github.com/user-attachments/assets/0f47b608-f1bd-4ec7-a857-580016cadd1c)
 
-In this project, we apply the k-means clustering algorithm to cluster the coping strategies. The goal is to identify distinct groups of coping strategies that influence resilience. To do this, we first use different feature selection methods to extract important strategies that influence resilience. Then, we employ k-means clustering to cluster these coping strategies. Finally, by comparing the obtained clusters, strategies that can improve resilience are introduced.
+Where:  
+- \( p_i \) is the proportion of samples belonging to class \( i \) at the node.  
+- \( C \) is the total number of classes.  
 
-## Data 
-We utilized a preexisting dataset provided by Konaszewski et al. (Konaszewski K, Niesiobędzka M, Surzykiewicz J. Resilience and mental health among juveniles: role of strategies for coping with stress. Health Qual Life Outcomes. 2021 Feb 18;19(1):58) https://doi.org/10.3886/E120001V1. They investigate the direct and indirect role of resilience in shaping the mental health of juveniles. The dataset includes resilience and 14 coping strategies. 
+**Interpretation**:  
+- \( G = 0 \): Perfect purity, all samples belong to one class.  
+- \( G = 0.5 \): Maximum impurity for a binary classification problem with an equal split between two classes.  
 
-## Methodology
-### Feature Selection
-Before applying k-means clustering, we employ various feature selection techniques to extract important coping strategies that significantly influence resilience. The selected coping strategies are then used as input for the clustering algorithm. [Notebook](https://github.com/AbbasPak/K-Means-Clustering-in-psychology-Case-study/blob/main/clustering%20coping.ipynb)
-### Clustering 
-Once the relevant coping strategies are identified, we utilize the [k-means clustering algorithm](https://github.com/AbbasPak/K-Means-Clustering-in-psychology-Case-study/blob/main/kmeans.rst) to group them into distinct clusters 
-based on their similarities. [Notebook](https://github.com/AbbasPak/K-Means-Clustering-in-psychology-Case-study/blob/main/clustering%20coping.ipynb)
+---
 
-## Results
+### **How Does Gini Importance Work?**  
 
-**Summary of feature selection**: The main features that were particularly important in influencing resilience are: *Active_coping, Planning , Emotional_support, Positive_reframing, Acceptance, Behavioral_disengagement, Humor* and *Self_blame*.
+1. **Split Evaluation**:  
+   At each split in a decision tree, the Gini Impurity of the parent node and the resulting child nodes is calculated.  
 
-**K-means clustering**: Firstly, by using the Elbow method, three clusters were chosen. 
+2. **Reduction in Gini Impurity**:  
+   The reduction in Gini Impurity caused by a split is computed as:  
+   
+   ![image](https://github.com/user-attachments/assets/561fcb40-8fcf-44cc-ab9c-507833426b79)
 
-<img src="figures/elbow.JPG" width="800" height="400"> 
+    
+   Where:  
+  ![image](https://github.com/user-attachments/assets/b857e1b9-09fe-4d5a-b0cc-27098c63dbfd)
+ 
 
-Then, k-means was conducted and the mean values of the selected coping strategies in each cluster were obtained as 
+3. **Feature Importance Aggregation**:  
+   The Gini reductions caused by splits using a specific feature are summed across all the trees in the ensemble (e.g., a Random Forest).  
 
-<img src="figures/coping.JPG" width="800" height="400"> 
+4. **Normalization**:  
+   The sum of reductions for each feature is normalized to provide a relative importance score.  
 
-Further, the means of resilience in each cluster are obtained as 
+---
 
-<img src="figures/res.JPG" width="800" height="400"> 
+### **Key Characteristics of Gini Importance**  
 
-Based on these results, the main attributes of each cluster are summarized as follows:
+- **Feature Dependence**:  
+  The Gini Importance score reflects how often a feature is used in splits and how much it reduces impurity.  
+- **Higher Importance**:  
+  Features that cause significant impurity reduction or are frequently used for splitting get higher importance scores.  
 
-_Cluster 1_: This cluster includes juveniles with the most resilience. They had high average for Active_coping, Emotional_support, Acceptance, planning and Positive_reframing and low average in Behavioral_disengagement, Self_blame and Humor.
+---
 
-_Cluster 2_: juveniles with the moderate resilience. This group had moderate average in almost all features and high average for Active_coping and Acceptance.
+### **Advantages**  
 
-_Cluster 0_: This group had the lowest value of resilience characteristic. Active_coping, Emotional_support, Acceptance, planning and Positive_reframing were minimum for these juveniles.
+1. **Efficient Computation**:  
+   Gini Importance is computed during model training, making it computationally efficient.  
+   
+2. **Interpretability**:  
+   The scores provide a straightforward way to rank feature importance.  
 
+3. **Global Perspective**:  
+   Gini Importance reflects the overall contribution of a feature across the entire model.  
 
+---
 
+### **Limitations**  
 
+1. **Bias Toward High-Cardinality Features**:  
+   Features with many unique values (e.g., ID numbers) can get artificially high importance scores because they create many small, pure splits.  
 
+2. **Correlation Effect**:  
+   If two features are highly correlated, their importance scores may be shared or skewed, making it harder to distinguish their true contribution.  
 
+3. **Model-Specific**:  
+   Gini Importance is specific to tree-based models and does not generalize to other model types.  
 
+---
 
