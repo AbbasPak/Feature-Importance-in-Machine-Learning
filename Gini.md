@@ -78,3 +78,58 @@ Where:
 
 ---
 
+Here’s an example code snippet to compute **Gini Importance (Mean Decrease in Impurity)** using a Random Forest classifier from Scikit-learn. This method is based on the reduction in Gini impurity contributed by each feature in the decision-making process of the trees in the forest.  
+
+### Code Example: Gini Importance with Random Forest  
+
+```python
+# Import necessary libraries
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.datasets import load_iris
+import matplotlib.pyplot as plt
+
+# Load a sample dataset (Iris dataset)
+data = load_iris()
+X = pd.DataFrame(data.data, columns=data.feature_names)
+y = data.target
+
+# Train a Random Forest Classifier
+rf = RandomForestClassifier(n_estimators=100, random_state=42)
+rf.fit(X, y)
+
+# Extract feature importances (Gini Importance)
+feature_importances = rf.feature_importances_
+
+# Create a DataFrame for better visualization
+importance_df = pd.DataFrame({
+    'Feature': X.columns,
+    'Importance': feature_importances
+}).sort_values(by='Importance', ascending=False)
+
+print("Feature Importances (Gini Importance):")
+print(importance_df)
+
+# Plot feature importances
+plt.figure(figsize=(8, 6))
+plt.barh(importance_df['Feature'], importance_df['Importance'], color='skyblue')
+plt.xlabel('Importance')
+plt.ylabel('Feature')
+plt.title('Feature Importance using Gini (Mean Decrease in Impurity)')
+plt.gca().invert_yaxis()
+plt.show()
+```
+
+---
+
+### Explanation:
+1. **Dataset**: The Iris dataset is used here as an example. You can replace it with your dataset.
+2. **Random Forest**: Trains a Random Forest classifier with 100 trees.
+3. **Feature Importances**: The `feature_importances_` attribute of the trained Random Forest provides the Gini Importance for each feature.
+4. **Visualization**: A horizontal bar chart shows the relative importance of each feature.
+
+---
+
+### Output:  
+![Untitled](https://github.com/user-attachments/assets/17bb9606-3f1f-43d0-865f-f10ef95c7258) 
